@@ -41,4 +41,4 @@ Before you start, ensure you have the following:
 For any questions or assistance, feel free to contact [vogonyo101@gmail.com]. Enjoy using the Compulyx Backend Project!
 
 ---
-**Note**: Replace `[your email here]` with your actual contact information.
+**Note**: Replace `[vogonyo101@gmail.com]` with your actual contact information.
