@@ -7,7 +7,7 @@ Welcome to the Compulyx Backend Project! This guide will help you get the projec
 Before you start, ensure you have the following:
 
 - Java 17 or later installed on your computer.
-- Internet browser for API testing.
+- [Postman](https://www.postman.com/downloads/) installed for API testing.
 
 ## Quick Start
 
@@ -26,15 +26,34 @@ Before you start, ensure you have the following:
      ```
 
 4. **Explore the APIs**:
-   - Open a web browser.
-   - Go to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to access the API documentation.
-   - Use the Swagger UI to see available endpoints, test them, and see example request and response formats.
+   - Open Postman.
+   - Import the Postman Collection provided with this project.
+   - Use the imported collection to test available endpoints, see example request and response formats.
 
 ## Optional Steps
 
 - **API Testing Tools**: You can use tools like [Postman](https://www.postman.com/downloads/) to test APIs interactively.
-- **Logging**: The project logs API requests and responses. You can find the logs in `C:\var\log\applications\API\logs`.
+
+- **Logging**: The project logs API requests and responses. Follow these steps to create the log directory:
+
+   - **Windows Users**:
+      - Open the File Explorer.
+      - Navigate to the `C:\` drive.
+      - Create a new folder named `var` (if not already present).
+      - Inside the `var` folder, create a new folder named `log`.
+      - Inside the `log` folder, create a new folder named `applications`.
+      - Inside the `applications` folder, create a new folder named `API`.
+      - Inside the `API` folder, create a new folder named `logs`.
+      - The complete path should be: `C:\var\log\applications\API\logs`.
+      - This is where you'll find the log files: `request.log` and `response.log`after you interact with the APIs on Postman
+
 - **Security**: The project uses JWT-based security. You don't need to configure it, but it's there to protect the APIs.
+
+## Need Help?
+
+For any questions or assistance, feel free to contact us at vogonyo101@gmail.com. Enjoy using the Compulyx Backend Project!
+
+Repository Link: [https://github.com/vogonyo/compulynx_backend](https://github.com/vogonyo/compulynx_backend)
 
 ## Need Help?
 
