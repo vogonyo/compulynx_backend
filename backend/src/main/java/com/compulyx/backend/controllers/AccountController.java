@@ -10,6 +10,7 @@ import com.compulyx.backend.repositories.AccountRepository;
 import com.compulyx.backend.services.AccountService;
 import com.compulyx.backend.vm.AccountDTO;
 import com.compulyx.backend.vm.ApiResponse;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Api(tags = "Account Management")
 @RequestMapping("/api/accounts")
 public class AccountController {
 
@@ -33,10 +35,15 @@ public class AccountController {
 
 
     @GetMapping
+    @ApiOperation(value = "Get All Accounts", notes = "Get All Accounts")
+
     public ResponseEntity<List<AccountDTO>> getAllAccounts() {
         List<AccountDTO> accountDTOs = accountService.getAllAccounts();
         return ResponseEntity.ok(accountDTOs);
     }
+
+
+    @ApiOperation(value = "Get account balance", notes = "Retrieve the balance of an account")
 
     @GetMapping("/{customerId}/balance")
     public ResponseEntity<ApiResponse<Double>> getAccountBalance(@PathVariable String customerId) {
@@ -51,21 +58,32 @@ public class AccountController {
         }
     }
 
+    @ApiOperation(value = "Get mini statement", notes = "Get mini statement")
+
     @GetMapping("/{customerId}/mini-statement")
     public ResponseEntity<List<Transaction>> getMiniStatement(@PathVariable String customerId) {
         List<Transaction> miniStatement = accountService.getMiniStatement(customerId);
         return ResponseEntity.ok(miniStatement);
     }
 
+    @ApiOperation(value = "Deposit", notes = "Deposit")
     @PostMapping("/{customerId}/deposit/{amount}")
-    public ResponseEntity<ApiResponse<Double>> cashDeposit(@PathVariable String customerId, @PathVariable double amount) {
+    public ResponseEntity<ApiResponse<Double>> cashDeposit(
+//            @ApiParam(value = "Bearer <your_token>", required = true)
+            @RequestHeader("Authorization") String authorization,
+            @PathVariable String customerId, @PathVariable double amount) {
         double newBalance = accountService.depositCash(customerId, amount);
         ApiResponse<Double> response = new ApiResponse<>(true, "Deposit successful", newBalance);
         return ResponseEntity.ok(response);
     }
 
+    @ApiOperation(value = "Withdraw", notes = "Withdraw")
     @PostMapping("/{customerId}/withdrawal/{amount}")
-    public ResponseEntity<ApiResponse<Double>> cashWithdrawal(@PathVariable String customerId, @PathVariable double amount) {
+    public ResponseEntity<ApiResponse<Double>> cashWithdrawal(
+            @ApiParam(value = "Bearer <your_token>", required = true)
+            @RequestHeader("Authorization") String authorization,
+            @PathVariable String customerId,
+            @PathVariable double amount) {
         double currentBalance = accountService.getAccountBalance(customerId);
 
         if (currentBalance >= amount) {
@@ -78,6 +96,10 @@ public class AccountController {
         }
     }
 
+    @ApiOperation(value = "Transfer", notes = "Transfer")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Bearer <your_token>", paramType = "header")
+    })
     @PostMapping("/{customerId}/transfer/{recipientAccountId}/{amount}")
     public ResponseEntity<ApiResponse<Object>> transferFunds(
             @PathVariable String customerId,

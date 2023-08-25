@@ -1,23 +1,31 @@
 package com.compulyx.backend.entities;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "customers_a")
+@Table(name = "customers")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(hidden = true)
     private Long id;
 
+    @ApiModelProperty(example = "335803455")
     private String customerId;
 
+    @ApiModelProperty(example = "Victor")
     private String firstname;
 
+    @ApiModelProperty(example = "Densey")
     private String lastname;
 
+    @ApiModelProperty(example = "Freezy@gmail.com")
     private String email;
 
+    @ApiModelProperty(hidden = true)
     private String pin;
 
 

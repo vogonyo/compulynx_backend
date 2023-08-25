@@ -8,6 +8,7 @@ import com.compulyx.backend.repositories.CustomerRepository;
 import com.compulyx.backend.security.JwtTokenProvider;
 import com.compulyx.backend.vm.CustomerLoginRequest;
 import com.compulyx.backend.vm.JwtToken;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import java.util.Optional;
 import java.util.Random;
 
 @RestController
+@Api(tags = "Customer Management")
 @RequestMapping("/api/customers")
 public class CustomerController {
 

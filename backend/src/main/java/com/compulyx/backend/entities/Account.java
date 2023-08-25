@@ -4,7 +4,7 @@ package com.compulyx.backend.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "account_a")
+@Table(name = "account")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
